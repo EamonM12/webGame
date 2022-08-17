@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content%}
+<h1> Home Page</h1>
+<style>
+    table{
+        border: 2px solid black;
+        }
+        th{
+        border: 2px solid black;
+        background-color:white;
+        }
+
+        td {
+            font-family:Times New Roman, Times;
+           font-size:120%;
+           border: 2px solid black;
+           }
+               .aligncenter {
+           text-align: center;
+           }
+</style>
+
+<p>Hello and welcome to the lights of game</p>
+<p>Here are the leader boards:</p>
+
+<table align= center width=500 height = 500>
+    <tr>
+        <th colspan = 1>Value</th>
+        <th colspan = 1>Score</th>
+    </tr>
+    <tr>
+        <th>Highscore</th>
+        <th>2</th>
+    </tr>
+    <tr>
+        <th>Trials</th>
+        <th>20</th>
+    </tr>
+    <tr>
+        <th>Players</th>
+        <th>3</th>
+    </tr>
+    <tr>
+        <th>Resets</th>
+        <th>222</th>
+    </tr>
+
+</table>
+
+
+{% endblock %}
