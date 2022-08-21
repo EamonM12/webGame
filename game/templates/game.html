@@ -1,139 +1,64 @@
 {% extends "layout.html" %}
 {% block content%}
-<script>
-    function toggle(i,j) {
-          b=document.getElementById("but_"+i+j);
-          t = b.innerHTML;
-          if (t=="X") {b.innerHTML = "O";
-                       b.setAttribute("style", "color:green; background-color:white");
-                      }
-          if (t=="O") {b.innerHTML = "X";
-                       b.setAttribute("style", "color:white; background-color:black");
-                      }
+
+<style>
+    table{
+        border: 2px solid black;
         }
-        
-    
-    // Please complete this function
-    function press(i,j) {
-    var element = document.getElementById("but_"+i+j);
-    var id = element.getAttribute("id");
-    
-    var array = id.split("");
-    var coord1 = Number(array[4]);
-    var coord2 = Number (array[5]);
-    var count = 0
-        toggle(coord1,coord2);
-    try {
-        toggle(coord1+1,coord2);
-    
-         checkAllOff();
-    }
-    catch(err){
-     count = count+1;
-    }
-    try {
-        toggle(coord1-1,coord2);
-    
-         checkAllOff();
-    }
-    catch(err){
-     count = count+1;
-    }
-    try {
-        toggle(coord1,coord2-1);
-    
-         checkAllOff();
-    }
-    catch(err){
-     count = count+1;
-    }
-    try {
-        toggle(coord1,coord2+1);
-    
-         checkAllOff();
-    }
-    catch(err){
-     count = count+1;
-    }
-    
-    
-    
-    }
-    
-    // Please complete this function
-    function checkAllOff(){
-    
-    var count = 0
-    
-    for( var y=0; y< 5; y++ ) {
-        for(var r=0; r<5; r++){
-         var cell = document.getElementById("but_"+y+r);
-          f = cell.innerHTML;
-          if (f == "X"){ count = count +1;
-      } 
-     } 
-    }
-    
-    while (count == 25){
-    return(document.getElementById("end").innerHTML="Congratulations! All lights out!")
-    
-    }
-    while (count < 25){
-    return(document.getElementById("end").innerHTML="")
-    
-    }
-    }
-    
-    // Please complete this function
-    function resetGrid(){
-    document.getElementById("end").innerHTML=""
-    for( var z=0; z< 5; z++ ) { 
-            for(var x=0; x<5; x++){    
-                var cell = document.getElementById("but_"+z+x); 
-                var state = cell.innerHTML
-                if(state == "X"){cell.innerHTML = "O";
-                   cell.setAttribute("style", "color:green; background-color:white");
-                }
-    
-    
-            
-            }
-         }
-         toggle(2,2)
-       
-    }
-    
-    // 
-    function generateGrid() {
-            var d = document.getElementById("button-grid");
-            var table = document.createElement("table");
-            d.appendChild(table);
-            for (var i = 0; i < 5; i++) {
-                    var row = document.createElement("tr");
-                    for (var j = 0; j < 5; j++) {
-                            var cell = document.createElement("td");
-                            cell.innerHTML = "<button type=button id=but_" + i + j +
-                                             " onclick=\"press(" +i + ',' +j + ")\"" + 
-                                             " style=\"color:green; background-color:white\"" +
-                                             ">O</button>" ;
-                            row.appendChild(cell);
-                    }
-                    table.appendChild(row);
-            }
-            toggle(2,2) // initial state
-    }
-    
-    window.onload = function() {
-            generateGrid();
-    };
-    
-    </script> 
+        th{
+        border: 2px solid black;
+        background-color:white;
+        }
+
+        td {
+            font-family:Times New Roman, Times;
+           font-size:120%;
+           border: 2px solid black;
+           }
+               .aligncenter {
+           text-align: center;
+           }
+</style>
+
+
+<script script type ="text/javascript" src="static/game.js" ></script>
+ 
+
 <h1>5x5 Lights off Puzzle</h1>
 <p>Click on buttons until they all turn black. When a button is pressed, the buttons above, below, left and right of the button pressed are also toggled. </p>
-<div id="button-grid"></div>
+<div id="button-grid">
+    
+    <div>
+    
+        <table align= right width=200 height = 200>
+            <tr>
+                <th colspan = 1>Value</th>
+                <th colspan = 1>Score</th>
+            </tr>
+            <tr>
+                <th>Wins</th>
+                <th id ="wins"></th>
+            </tr>
+            <tr>
+                <th>Trials</th>
+                <th id="trials"></th>
+            </tr>    
+        </table>
+    </div>
+</div>
 <h2 id="end" style="color:green"></h2>
 <div id="resetbutton">
-<button type="button" id="reset" onclick=resetGrid()>Reset</button>
+<button type="button" id="reset" onclick=resetGrid()>Reset</button> <p align = right>
 </div>
+
+<div align=right>
+    <button id ="submit"  class="button">
+        <span>
+                <i>Click</i>
+        </span>
+    </button>
+</div>
+
+
 
 {% endblock %}

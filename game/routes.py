@@ -1,10 +1,12 @@
+from crypt import methods
 from site import USER_BASE
-from flask import render_template, url_for,flash,redirect,request
+from flask import render_template, url_for,flash,redirect,request,jsonify
 from game import app,db,bcrypt
 from game.forums import RegistrationForm, LoginForm
 from game.models import User
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_login import login_user,current_user,logout_user, login_required
+import json,random
 
 
 @app.route("/")
@@ -13,6 +15,8 @@ def home():
 
 @app.route("/game")
 def game():
+    
+    
     return render_template("game.html")
 
 @app.route("/register",methods=["GET","POST"])
@@ -55,9 +59,24 @@ def login():
 
 @app.route("/logout")
 def logout():
+    
     logout_user()
     return redirect(url_for("home"))
 
+
+# #fix this
+# @app.route("/result",methods = ["POST","GET"])
+# def result():
+#     if request.method == "POST":
+#         data = request.get_data(True,True,False)
+#         print(data)
+#         # data = request.get_json(force=True)
+#         return(str(data)) 
+#     # return(jsonify(data))
+
+
+
+# add logout message
 @app.route("/account")
 @login_required
 def account():

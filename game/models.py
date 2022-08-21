@@ -1,3 +1,4 @@
+from locale import windows_locale
 from game import db,login_manager
 from flask_login import UserMixin
 
@@ -13,7 +14,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=True, default="default.jpg")
     password = db.Column(db.String(60), nullable=False)
-    #No of wins
-    #No of trials
+    win_count = db.Column(db.Integer(),nullable=False,default=0)
+    trial_count = db.Column(db.Integer(),nullable=False,default=0)
 def __repr__(self):
     return f"User('{self.username}','{self.email}','{self.image_file}')"
